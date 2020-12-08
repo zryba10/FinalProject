@@ -1,0 +1,110 @@
+"""
+
+Author:Zachary R.
+Date: 12/07/20
+Program Name: GUI Hangman
+Description: Hangman GUI program
+
+"""
+
+from breezypythongui import EasyFrame
+from tkinter import PhotoImage
+import random
+
+class GUI_Cards(EasyFrame):
+   
+    def __init__(self):
+        """Creates the dice, and sets up the Images and labels
+        for the two dice to be displayed, the state label,
+        and the two command buttons."""
+        EasyFrame.__init__(self, title = "GUI Cards")
+        self.setSize(220, 200)
+        wrong = ""
+        self.manLabel = self.addLabel("", row = 0,
+                                       column = 0,
+                                       sticky = "NSEW")
+        self.stateLabel = self.addLabel("", row = 1, column = 0,
+                                        sticky = "NSEW",
+                                        columnspan = 2)
+##        self.addButton(row = 2, column = 3,
+##                       text = "Submit",
+##                       command = self.submit)
+        self.refreshImages(wrong)        
+
+
+    # Button to submit guess
+    #def submit(self):
+        wrong=0
+        guessList = ""
+        wordList = ["chemistry", "chest", "union", "singer", "marriage", "thanks",
+            "ratio", "control", "revolution", "platform", "apartment", "awareness",
+            "month", "establishment", "employer", "bonus", "combination",
+            "environment", "owner", "introduction"]
+        word = random.choice(wordList)
+        right=0
+
+#########
+        # Calculates if letter hasn't already been guessed
+##        if guess not in guessList:
+##            if guess not in word:
+##                # Adds wrong guesses that have not already been made
+##                wrong+=1
+##                # Displays end of games and breaks if 6 wrong guesses are made
+##                if(wrong == 6):
+##                    print(dict["lose"],word)
+##                    print("Thanks for playing, exiting game...")
+##                    break
+##            # Adds the guesses letter to guest list
+##            guessList += guess
+##            #Displays correct guess and shows guessed letters in word
+##            if guess in word:
+##                print("\nThat letter is in the word!")
+##                for char in word:
+##                    if char in guessList:
+##                        print(char)
+##                        right+=1
+##                    else:
+##                        print("_")
+##                # if the right words in list match length of word, the game is won
+##                if right == len(word):
+##                    print(dict["win"],word)
+##                    print("Thanks for playing, exiting game...")
+##                    break    
+##
+##            # Displays incorrect guess and guesses left to loss
+##            else:
+##                print(dict["incorrect"])
+##                print("You have",6-wrong,"wrong guesses left")
+##        # Displays user reguesses a letter and informs of all guessed letters
+##        else:
+##            print("\nYou have already guessed that letter.")
+##            print("The letters you have guessed are:", (guessList),"\n")
+########
+
+
+
+
+
+
+
+    
+    # Sets image to hangman state
+    def refreshImages(self, wrong):
+        """Updates the images in the window."""
+        try:
+            fileName = "man/" + wrong + ".gif"
+            self.image = PhotoImage(file = fileName)
+            self.manLabel["image"] = self.image
+        except Exception:
+            fileName = "man/none.gif"
+            self.image = PhotoImage(file = fileName)
+            self.manLabel["image"] = self.image
+
+
+
+
+def main():
+    GUI_Cards().mainloop()
+
+if __name__ == "__main__":
+    main()
